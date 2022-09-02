@@ -12,7 +12,7 @@ const multiply = function (a, b) {
 
 const divide = function (a, b) {
     if (b === "0") {
-        return "X_X";
+        return "error";
     }
     return parseFloat(a) / parseFloat(b);
 }
@@ -156,7 +156,12 @@ function setDisplay(value) {
 
     if (value === "previous") {
         let previousNumber = Math.round(previousValue * 100000000000) / 100000000000;
-        display.textContent = previousNumber;
+
+        if (isNaN(previousNumber)) {
+            display.textContent = "ERROR X_X";
+        } else {
+            display.textContent = previousNumber;
+        }
     } else if (value === "current") {
         display.textContent = currentValue;
     } else {
