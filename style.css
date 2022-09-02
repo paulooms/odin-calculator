@@ -37,7 +37,8 @@ button {
 }
 
 
-.number {
+.number,
+.decimal {
     background-color: #FFF3F0;
 }
 
@@ -45,11 +46,12 @@ button {
     background-color: #9046CF;
 }
 
-.equal {
+.equals {
     background-color: #F487B6;
 }
 
-.clear {
+.cl,
+.bs {
     background-color: #CC59D2;
 }
 
@@ -72,4 +74,5 @@ button:hover {
     padding: 12px;
     box-sizing: border-box;
     min-height: 87px;
+    overflow: scroll;
 }

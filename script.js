@@ -1,17 +1,20 @@
 const add = function (a, b) {
-    return parseInt(a) + parseInt(b);
+    return parseFloat(a) + parseFloat(b);
 }
 
 const subtract = function (a, b) {
-    return parseInt(a) - parseInt(b);
+    return parseFloat(a) - parseFloat(b);
 }
 
 const multiply = function (a, b) {
-    return parseInt(a) * parseInt(b);
+    return parseFloat(a) * parseFloat(b);
 }
 
 const divide = function (a, b) {
-    return parseInt(a) / parseInt(b);
+    if (b === "0") {
+        return "X_X";
+    }
+    return parseFloat(a) / parseFloat(b);
 }
 
 const operate = function (operator, a, b) {
@@ -26,12 +29,12 @@ const operate = function (operator, a, b) {
             return divide(a, b);
         default:
             return "ERROR"
-
     }
 }
 
 let currentValue = "";
 let previousValue = "";
+let currentOperator = "";
 
 let display = document.getElementById('display-current');
 let displayPrev = document.getElementById('display-previous');
@@ -63,13 +66,19 @@ const buttonClicked = function (btn) {
 
 }
 
-
 let buttonIsNumber = function (num) {
+
+    if (currentOperator === "") {
+        previousValue = "";
+    }
+
     currentValue += num;
-    display.textContent = currentValue;
+    setDisplay('current');
 
     console.log(`Current value = ${currentValue}`)
     console.log(`Previous value = ${previousValue}`)
+    console.log(`Current operator = ${currentOperator}`)
+
 }
 
 let buttonIsDecimal = function () {
@@ -81,53 +90,90 @@ let buttonIsDecimal = function () {
 }
 
 let buttonIsOperator = function (operator) {
-    currentOperator = operator;
-    // if previous number does not exist, 
-    if (previousValue === "") {
-        previousValue = currentValue;
-        displayPrev.textContent = previousValue;
-        currentValue = "";
-        display.textContent = "0";
-
-        // if previous number exists, operate first, then assign values
-    } else {
-        currentValue = operate(currentOperator, previousValue, currentValue);
-        display.textContent = currentValue;
-        previousValue = currentValue;
-        displayPrev.textContent = previousValue;
-        currentValue = "";
+    if (previousValue === "X_X") {
+        clear();
     }
 
+    if (currentOperator != "") { // We already have a current operator , so we have to operate() before we can set a new one. Unless we don't have a current value yet.
+        if (currentValue === "") {
+            currentOperator = operator
+        } else {
+            previousValue = operate(currentOperator, previousValue, currentValue);
+            setDisplay('previous');
+            currentOperator = operator;
+            currentValue = "";
+        }
 
+    } else if (currentOperator === "" && previousValue != "") { //We don't have an operator yet, but we do have a previous value. We have to set the current operator.
+        currentOperator = operator;
+
+    } else { // We don't have an operator, and no previous value. We need to set the current operator and move the current value to previous.
+        previousValue = currentValue;
+        currentOperator = operator;
+        setDisplay('previous');
+        currentValue = "";
+    }
     console.log(`Current value = ${currentValue}`)
     console.log(`Previous value = ${previousValue}`)
+    console.log(`Current operator = ${currentOperator}`)
 }
 
 let buttonIsEquals = function () {
-    currentValue = operate(currentOperator, previousValue, currentValue);
-    previousValue = currentValue;
-    currentValue = "";
-    display.textContent = currentValue;
-    displayPrev.textContent = previousValue;
-    display.textContent = "0";
+
+    if (currentOperator != "" && currentValue != "" && previousValue != "") {
+        previousValue = operate(currentOperator, previousValue, currentValue);
+        setDisplay('previous');
+        currentOperator = "";
+        currentValue = "";
+
+    } else if (currentValue != "") {
+        previousValue = currentValue;
+        currentValue = "";
+        setDisplay('previous')
+    }
 
     console.log(`Current value = ${currentValue}`)
     console.log(`Previous value = ${previousValue}`)
+    console.log(`Current operator = ${currentOperator}`)
 }
 
 let buttonIsBS = function () {
-    console.log('BS');
+    if (previousValue === "X_X") {
+        clear();
+        return;
+    }
+    if (currentValue != "") {
+        currentValue = currentValue.slice(0, -1);
+        setDisplay('current');
+    } else {
+        currentValue = previousValue.toString().slice(0, -1);
+        previousValue = "";
+        setDisplay('current');
+    }
 }
 
 let buttonIsClear = function () {
-    console.log('CLEAR')
+    clear();
 }
 
+function clear() {
+    currentOperator = "";
+    currentValue = "";
+    previousValue = "";
+    setDisplay();
+}
 
-// setup calculation array = [currentNum,previousNum,operator];
-// when typing numbers or decimal, add them to string (currentNum)
-// when typing an operator, change operator value, currentNum becomes previousNum 
-// when typing numbers after typing an operator, add them to string (value B)
-// when typing equals, run operate with arguments from calculation array
-// when typing bs, remove last character in currentNum
-// when typing cl, reset the calculator
+function setDisplay(value) {
+
+    if (value === "previous") {
+        let previousNumber = Math.round(previousValue * 100000000000) / 100000000000;
+        display.textContent = previousNumber;
+    } else if (value === "current") {
+        display.textContent = currentValue;
+    } else {
+        display.textContent = "0";
+    }
+}
+// console.log(`Current value = ${currentValue}`)
+// console.log(`Previous value = ${previousValue}`)
+// console.log(`Current operator = ${currentOperator}`)
