@@ -1,3 +1,75 @@
-h1 {
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&display=swap');
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'DM Mono', monospace;
+
+
+}
+
+.calculator {
+    width: 480px;
+    border: solid 4px black;
+
+}
+
+.numpad {
+    background-color: black;
+    width: 100%;
+    height: 480px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding-top: 4px;
+}
+
+
+button {
+    border-width: 0;
+    min-width: 100px;
+    flex: 1;
+    font-size: 3em;
+    font-family: 'DM Mono', monospace;
+
+}
+
+
+.number {
+    background-color: #FFF3F0;
+}
+
+.operator {
+    background-color: #9046CF;
+}
+
+.equal {
+    background-color: #F487B6;
+}
+
+.clear {
+    background-color: #CC59D2;
+}
+
+
+button:hover {
+    background-color: #d35e77;
+}
+
+#display-container {
+    display: flexbox;
+    flex-direction: column;
+
+}
+
+#display-current,
+#display-previous {
+    font-size: 3em;
+    text-align: right;
+    width: 480px;
+    padding: 12px;
+    box-sizing: border-box;
+    min-height: 87px;
 }
