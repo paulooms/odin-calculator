@@ -75,10 +75,6 @@ let buttonIsNumber = function (num) {
     currentValue += num;
     setDisplay('current');
 
-    console.log(`Current value = ${currentValue}`)
-    console.log(`Previous value = ${previousValue}`)
-    console.log(`Current operator = ${currentOperator}`)
-
 }
 
 let buttonIsDecimal = function () {
@@ -113,9 +109,6 @@ let buttonIsOperator = function (operator) {
         setDisplay('previous');
         currentValue = "";
     }
-    console.log(`Current value = ${currentValue}`)
-    console.log(`Previous value = ${previousValue}`)
-    console.log(`Current operator = ${currentOperator}`)
 }
 
 let buttonIsEquals = function () {
@@ -131,10 +124,6 @@ let buttonIsEquals = function () {
         currentValue = "";
         setDisplay('previous')
     }
-
-    console.log(`Current value = ${currentValue}`)
-    console.log(`Previous value = ${previousValue}`)
-    console.log(`Current operator = ${currentOperator}`)
 }
 
 let buttonIsBS = function () {
@@ -174,6 +163,3 @@ function setDisplay(value) {
         display.textContent = "0";
     }
 }
-// console.log(`Current value = ${currentValue}`)
-// console.log(`Previous value = ${previousValue}`)
-// console.log(`Current operator = ${currentOperator}`)
