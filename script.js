@@ -36,8 +36,7 @@ let currentValue = "";
 let previousValue = "";
 let currentOperator = "";
 
-let display = document.getElementById('display-current');
-let displayPrev = document.getElementById('display-previous');
+let display = document.getElementById('display');
 
 let btn = document.getElementsByClassName('button');
 
@@ -127,7 +126,7 @@ let buttonIsEquals = function () {
 }
 
 let buttonIsBS = function () {
-    if (previousValue === "X_X") {
+    if (previousValue === "error") {
         clear();
         return;
     }
@@ -141,7 +140,7 @@ let buttonIsBS = function () {
     }
 }
 
-let buttonIsClear = function () {
+function buttonIsClear() {
     clear();
 }
 

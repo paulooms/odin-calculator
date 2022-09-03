@@ -65,8 +65,7 @@ button:hover {
 
 }
 
-#display-current,
-#display-previous {
+#display {
     font-size: 3em;
     text-align: right;
     width: 480px;
