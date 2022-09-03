@@ -6,8 +6,6 @@
     justify-content: center;
     height: 100vh;
     font-family: 'DM Mono', monospace;
-
-
 }
 
 .calculator {
@@ -74,13 +72,3 @@ button:hover {
     min-height: 87px;
     overflow: scroll;
 }
-
-// 480 + 10px + 10px = 500 width, then 100vw-20px;
-
-/* @media only screen and (max-width: 500px) {
-    .calculator {
-        margin: 10px;
-        width: 100vh;
-
-    }
-} */

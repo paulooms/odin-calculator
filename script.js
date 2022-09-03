@@ -36,9 +36,9 @@ let currentValue = "";
 let previousValue = "";
 let currentOperator = "";
 
-let display = document.getElementById('display');
+const display = document.getElementById('display');
 
-let btn = document.getElementsByClassName('button');
+const btn = document.getElementsByClassName('button');
 
 for (let i = 0; i < btn.length; i++) {
     btn[i].addEventListener('click', () => {
@@ -62,10 +62,9 @@ const buttonClicked = function (btn) {
     } else if (btn.classList.contains('cl')) {
         buttonIsClear();
     }
-
 }
 
-let buttonIsNumber = function (num) {
+const buttonIsNumber = function (num) {
 
     if (currentOperator === "") {
         previousValue = "";
@@ -76,7 +75,7 @@ let buttonIsNumber = function (num) {
 
 }
 
-let buttonIsDecimal = function () {
+const buttonIsDecimal = function () {
     if (currentValue.includes('.')) {
         return;
     } else {
@@ -84,7 +83,7 @@ let buttonIsDecimal = function () {
     }
 }
 
-let buttonIsOperator = function (operator) {
+const buttonIsOperator = function (operator) {
     if (previousValue === "X_X") {
         clear();
     }
@@ -110,7 +109,7 @@ let buttonIsOperator = function (operator) {
     }
 }
 
-let buttonIsEquals = function () {
+const buttonIsEquals = function () {
 
     if (currentOperator != "" && currentValue != "" && previousValue != "") {
         previousValue = operate(currentOperator, previousValue, currentValue);
@@ -125,7 +124,7 @@ let buttonIsEquals = function () {
     }
 }
 
-let buttonIsBS = function () {
+const buttonIsBS = function () {
     if (previousValue === "error") {
         clear();
         return;
@@ -167,3 +166,14 @@ function setDisplay(value) {
         display.textContent = "0";
     }
 }
+
+window.addEventListener('keydown', function (e) {
+    if (e.key >= 0 && e.key < 10) {
+        buttonIsNumber(e.key)
+    } else if (e.key === ".") {
+        buttonIsDecimal();
+    } else if (e.code === 'Equal') {
+        buttonIsEquals();
+    }
+    console.log(e);
+});
