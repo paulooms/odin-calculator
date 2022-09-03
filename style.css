@@ -11,9 +11,9 @@
 }
 
 .calculator {
-    width: 480px;
+    max-width: 480px;
     border: solid 4px black;
-
+    margin: 8px;
 }
 
 .numpad {
@@ -29,7 +29,7 @@
 
 button {
     border-width: 0;
-    min-width: 100px;
+    min-width: 20%;
     flex: 1;
     font-size: 3em;
     font-family: inherit;
@@ -68,9 +68,19 @@ button:hover {
 #display {
     font-size: 3em;
     text-align: right;
-    width: 480px;
+    width: 100%;
     padding: 12px;
     box-sizing: border-box;
     min-height: 87px;
     overflow: scroll;
 }
+
+// 480 + 10px + 10px = 500 width, then 100vw-20px;
+
+/* @media only screen and (max-width: 500px) {
+    .calculator {
+        margin: 10px;
+        width: 100vh;
+
+    }
+} */
