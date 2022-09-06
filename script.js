@@ -60,7 +60,7 @@ const buttonClicked = function (btn) {
     } else if (btn.classList.contains('bs')) {
         buttonIsBS();
     } else if (btn.classList.contains('cl')) {
-        buttonIsClear();
+        clear();
     }
 }
 
@@ -84,7 +84,7 @@ const buttonIsDecimal = function () {
 }
 
 const buttonIsOperator = function (operator) {
-    if (previousValue === "X_X") {
+    if (previousValue === "error") {
         clear();
     }
 
@@ -137,10 +137,6 @@ const buttonIsBS = function () {
         previousValue = "";
         setDisplay('current');
     }
-}
-
-function buttonIsClear() {
-    clear();
 }
 
 function clear() {
